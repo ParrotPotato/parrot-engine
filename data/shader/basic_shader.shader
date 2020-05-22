@@ -21,6 +21,6 @@ in vec4 fragmentcolor;
 
 void main()
 {
-	out_color = fragmentcolor;
+	out_color = vec4(fragmentcolor);
 }
 
