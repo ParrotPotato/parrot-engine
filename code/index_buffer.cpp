@@ -17,7 +17,7 @@ namespace ngx
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 
-		void create(void * dataptr, uint64 size, int type = GL_STATIC_DRAW)
+		Index_Buffer(void * dataptr, uint64 size, int type = GL_STATIC_DRAW)
 		{
 			glGenBuffers(1, &id);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);

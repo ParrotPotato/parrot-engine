@@ -51,10 +51,10 @@ int main()
 	GLuint vao = 0;
 	GLuint vbo = 0;
 
-	ngx::Vertex_Buffer vertexbuffer;
-	ngx::Vertex_Buffer vertexcolorbuffer;
+	ngx::Vertex_Buffer vertexbuffer(vertices, sizeof(ngx::real32) *  12);
+	ngx::Vertex_Buffer vertexcolorbuffer(colors, sizeof(ngx::real32) * 12);;
 
-	ngx::Index_Buffer indexbuffer;
+	ngx::Index_Buffer indexbuffer(indices, sizeof(ngx::uint32) * 6);
 
 	ngx::Shader_Program program ; 
 	program.load_shader_program("shader/basic_shader.shader");
@@ -62,10 +62,6 @@ int main()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	vertexcolorbuffer.create(colors, sizeof(ngx::real32) * 12);
-	vertexbuffer.create(vertices, sizeof(ngx::real32) * 12);
-
-	indexbuffer.create(indices, sizeof(ngx::uint32) * 6);
 	indexbuffer.bind();
 
 	vertexbuffer.bind();

@@ -17,7 +17,7 @@ namespace ngx
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
-		void create(void * dataptr, uint64 size, int type = GL_STATIC_DRAW)
+		Vertex_Buffer(void * dataptr, uint64 size, int type = GL_STATIC_DRAW)
 		{
 			glGenBuffers(1, &id);
 			glBindBuffer(GL_ARRAY_BUFFER, id);
