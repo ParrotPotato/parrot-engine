@@ -49,15 +49,23 @@ namespace ngx{
 			unbind();
 		}
 
+		void draw()
+		{
+			glDrawElements(GL_TRIANGLES, indexsize, GL_UNSIGNED_INT, (void *) 0);	
+		}
+
 		void add_index_buffer(const Index_Buffer & ib)
 		{
 			bind();
 			ib.bind();
+			indexsize = ib.get_count();
 			unbind();
 		}
 
 		private:
 		GLuint id = 0;
+
+		uint32 indexsize = 0;
 	};
 }
 
