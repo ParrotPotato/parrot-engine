@@ -1,4 +1,4 @@
-#include "ngx.cpp"
+#include "parrot.cpp"
 #include "window.cpp"
 #include "input.cpp"
 
@@ -13,23 +13,23 @@
 void keydown(int key)
 {
 	if(key == SDLK_ESCAPE)
-		ngx::Core::terminate_core();
+		parrot::Core::terminate_core();
 }
 
 struct Vertex
 {
-	ngx::real32 x, y, z;
-	ngx::real32 r, g, b;
-	ngx::real32 u, v;
+	parrot::real32 x, y, z;
+	parrot::real32 r, g, b;
+	parrot::real32 u, v;
 };
 
 int main()
 {
-	ngx::Core::init();
+	parrot::Core::init();
 
-	ngx::Window main_window;
+	parrot::Window main_window;
 	main_window.create_widnow("main_window", 600, 430);
-	ngx::InputHandler inputhandler; 
+	parrot::InputHandler inputhandler; 
 
 	inputhandler.set_keydown_callback(keydown);
 	
@@ -44,25 +44,22 @@ int main()
 		{-0.5f, 0.5f, 0.0f, 128.0f / 255.0f, 132.0f / 255.0f, 189.0f / 255.0f, 0.0f, 1.0f}
 	};
 	
-	ngx::uint32 indices[] = 
+	parrot::uint32 indices[] = 
 	{
 		0, 1, 2,
 		0, 2, 3
 	};
 
-	GLuint vao = 0;
-	GLuint vbo = 0;
+	parrot::Texture texture("res/wall.jpg");
+	parrot::Vertex_Buffer vertexbuffer(vertices, sizeof(Vertex) *  4);
+	parrot::Index_Buffer indexbuffer(indices, sizeof(parrot::uint32) * 6, 6);
 
-	ngx::Texture texture("res/wall.jpg");
-	ngx::Vertex_Buffer vertexbuffer(vertices, sizeof(Vertex) *  4);
-	ngx::Index_Buffer indexbuffer(indices, sizeof(ngx::uint32) * 6, 6);
-
-	ngx::Shader_Program program ; 
+	parrot::Shader_Program program ; 
 	program.load_shader_program("shader/basic_shader.shader");
 
-	ngx::Vertex_Array vertexarray;
+	parrot::Vertex_Array vertexarray;
 
-	ngx::Vertex_Buffer_Layout bufferlayout;
+	parrot::Vertex_Buffer_Layout bufferlayout;
 	bufferlayout.push(3, GL_FLOAT); // vertices 
 	bufferlayout.push(3, GL_FLOAT); // color
 	bufferlayout.push(2, GL_FLOAT); // uv 
@@ -70,7 +67,7 @@ int main()
 	vertexarray.add_vertex_buffer(vertexbuffer, bufferlayout);
 	vertexarray.add_index_buffer(indexbuffer); 
 
-	while(ngx::Core::is_running())
+	while(parrot::Core::is_running())
 	{
 		main_window.clear();
 

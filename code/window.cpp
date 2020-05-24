@@ -1,4 +1,4 @@
-#ifndef NGX_WINDOW
+#ifndef PARROT_WINDOW
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -7,7 +7,7 @@
 
 #include "types.cpp"
 
-namespace ngx{
+namespace parrot{
 
 	struct Window
 	{
@@ -80,5 +80,5 @@ namespace ngx{
 	};
 }
 
-#define NGX_WINDOW
+#define PARROT_WINDOW
 #endif

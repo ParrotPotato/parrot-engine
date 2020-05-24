@@ -1,8 +1,8 @@
-#ifndef NGX_VERTEX_BUFFER_LAYOUT
+#ifndef PARROT_VERTEX_BUFFER_LAYOUT
 
 #include <GL/glew.h>
 
-namespace ngx
+namespace parrot
 {
 	struct Vertex_Buffer_Layout_Element 
 	{
@@ -49,5 +49,5 @@ namespace ngx
 	};
 }
 
-#define NGX_VERTEX_BUFFER_LAYOUT
+#define PARROT_VERTEX_BUFFER_LAYOUT
 #endif

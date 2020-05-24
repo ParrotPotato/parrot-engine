@@ -1,8 +1,8 @@
-#ifndef NGX_TYPES 
+#ifndef PARROT_TYPES 
 
 #include <stdint.h>
 
-namespace ngx{
+namespace parrot{
 
 	typedef int8_t int8;
 	typedef int16_t int16;
@@ -19,5 +19,5 @@ namespace ngx{
 
 }
 
-#define NGX_TYPES
+#define PARROT_TYPES
 #endif

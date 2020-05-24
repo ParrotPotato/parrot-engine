@@ -1,8 +1,8 @@
-#ifndef NGX_INDEX_BUFFER
+#ifndef PARROT_INDEX_BUFFER
 
 #include <GL/glew.h>
 
-namespace ngx
+namespace parrot
 {
 	class Index_Buffer 
 	{
@@ -39,5 +39,5 @@ namespace ngx
 	};
 }
 
-#define NGX_INDEX_BUFFER 
+#define PARROT_INDEX_BUFFER 
 #endif 

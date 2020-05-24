@@ -1,4 +1,4 @@
-#ifndef NGX_VERTEX_ARRAY
+#ifndef PARROT_VERTEX_ARRAY
 
 #include "vertex_buffer.cpp"
 #include "vertex_buffer_layout.cpp"
@@ -7,7 +7,7 @@
 
 #include <GL/glew.h>
 
-namespace ngx{
+namespace parrot{
 
 	class Vertex_Array
 	{
@@ -69,5 +69,5 @@ namespace ngx{
 	};
 }
 
-#define NGX_VERTEX_ARRAY
+#define PARROT_VERTEX_ARRAY
 #endif 

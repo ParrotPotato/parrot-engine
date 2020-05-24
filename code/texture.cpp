@@ -1,4 +1,4 @@
-#ifndef NGX_TEXTURE_LOADING
+#ifndef PARROT_TEXTURE_LOADING
 
 #include <string>
 #include <fstream>
@@ -8,7 +8,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-namespace ngx
+namespace parrot
 {
 	class Texture
 	{
@@ -57,5 +57,5 @@ namespace ngx
 	};
 }
 
-#define NGX_TEXTURE_LOADING
+#define PARROT_TEXTURE_LOADING
 #endif

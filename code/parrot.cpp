@@ -1,4 +1,4 @@
-#ifndef NGX_HEADER
+#ifndef PARROT_HEADER
 
 #include <SDL2/SDL.h>
 
@@ -7,7 +7,7 @@
 // engine class and should only be the one changing state of the game engine
 //
 //
-namespace ngx{
+namespace parrot{
 
 	class Core{
 		public:
@@ -34,5 +34,5 @@ namespace ngx{
 	bool Core::is_engine_running = false; 
 }
 
-#define NGX_HEADER
+#define PARROT_HEADER
 #endif 

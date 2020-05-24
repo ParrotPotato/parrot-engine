@@ -1,4 +1,4 @@
-#ifndef NGX_OPENGL_SHADER
+#ifndef PARROT_OPENGL_SHADER
 
 #include <GL/glew.h>
 
@@ -7,7 +7,7 @@
 
 #include "resource_handler.cpp"
 
-namespace ngx{
+namespace parrot{
 
 	enum Shader_Index 
 	{
@@ -126,5 +126,5 @@ namespace ngx{
 	};
 }
 
-#define NGX_OPENGL_SHADER
+#define PARROT_OPENGL_SHADER
 #endif

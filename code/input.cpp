@@ -1,4 +1,4 @@
-#ifndef NGX_INPUT
+#ifndef PARROT_INPUT
 
 #include <SDL2/SDL.h>
 #include <unordered_map>
@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace ngx{
+namespace parrot{
 	
 	struct InputHandler
 	{
@@ -99,5 +99,5 @@ namespace ngx{
 }
 
 
-#define NGX_INPUT
+#define PARROT_INPUT
 #endif

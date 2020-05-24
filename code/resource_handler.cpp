@@ -1,10 +1,10 @@
-#ifndef NGX_RESOURCE_HANDLER
+#ifndef PARROT_RESOURCE_HANDLER
 
 #include <fstream>
 #include <string>
 #include <vector>
 
-namespace ngx
+namespace parrot
 {
 	class Resource_Loader
 	{
@@ -54,5 +54,5 @@ namespace ngx
 	};
 }
 
-#define NGX_RESOURCE_HANDLER
+#define PARROT_RESOURCE_HANDLER
 #endif

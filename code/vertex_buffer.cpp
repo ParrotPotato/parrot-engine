@@ -1,8 +1,8 @@
-#ifndef NGX_VERTEX_BUFFER
+#ifndef PARROT_VERTEX_BUFFER
 
 #include <GL/glew.h>
 
-namespace ngx
+namespace parrot
 {
 	class Vertex_Buffer
 	{
@@ -35,5 +35,5 @@ namespace ngx
 	};
 }
 
-#define NGX_VERTEX_BUFFER
+#define PARROT_VERTEX_BUFFER
 #endif 
