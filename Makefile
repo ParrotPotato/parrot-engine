@@ -15,7 +15,3 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cc
 clean: 
 	rm bin/*.o bin/*.out 2> /dev/null
 
-run:
-	pushd ./data/
-	./engine.out
-	popd  

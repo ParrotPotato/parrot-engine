@@ -1,6 +1,7 @@
 #include "parrot.hh"
 #include "window.hh"
 #include "input.hh"
+#include "camera.hh"
 
 #include "texture.hh"
 
@@ -9,6 +10,13 @@
 #include "vertex_array.hh"
 #include "vertex_buffer.hh"
 #include "index_buffer.hh"
+
+#include <iostream>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
+
+// Here is a new comment for handling the output and input
 
 void keydown(int key)
 {
@@ -50,9 +58,22 @@ int main()
 		0, 2, 3
 	};
 
+	// ADDING A NEW THINGS HERE FOR TESTING OUT THE MAIN BUFFER
+	// AND ITS FUNCTIONALITY 
+	
+	parrot::Camera camera = {};
+	camera.get_matrix(); // Thsi is the things which returns us the buffer handler
+
 	parrot::Texture texture("res/wall.jpg");
 	parrot::Vertex_Buffer vertexbuffer(vertices, sizeof(Vertex) *  4);
 	parrot::Index_Buffer indexbuffer(indices, sizeof(parrot::uint32) * 6, 6);
+
+	parrot::Camera camera = {};
+	camera.position = glm::vec3(0.0, 0.0, 2.0f);
+	camera.width = main_window.get_width();
+	camera.height = main_window.get_height();
+	camera.near = 0.1f;
+	camera.far = 1000.0f;
 
 	parrot::Shader_Program program ; 
 	program.load_shader_program("shader/basic_shader.shader");
@@ -74,6 +95,7 @@ int main()
 		texture.bind(GL_TEXTURE0);
 		vertexarray.bind();
 		program.use_program();
+		program.set_uniform("transformation", camera.get_matrix());
 		
 		vertexarray.draw();
 

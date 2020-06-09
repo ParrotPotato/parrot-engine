@@ -1,8 +1,12 @@
 #ifndef PARROT_OPENGL_SHADER
 
+#include "parrot.hh"
+
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 #include <string>
+#include <vector>
 
 
 namespace parrot{
@@ -14,6 +18,12 @@ namespace parrot{
 		SHADER_FRAGMENT = 1,
 
 		SHADER_COUNT = 2
+	};
+
+	struct Uniform_Info
+	{
+		std::string name;
+		GLint location;
 	};
 
 	struct Shader_Source
@@ -36,11 +46,19 @@ namespace parrot{
 
 		void unuse_program();
 
+		int set_uniform(std::string name, glm::mat4 matval);
+		int set_uniform(std::string name, real32 realval);
+
 		private:
+
+		Uniform_Info add_uniform(std::string name);
 
 		GLuint program;
 		GLuint vs;
 		GLuint fs;
+
+		std::vector<Uniform_Info> uniforms;
+		
 	};
 }
 

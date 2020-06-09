@@ -20,6 +20,9 @@ namespace parrot{
 		void clear();
 		void update();
 
+		uint32 get_width() const {return width;}
+		uint32 get_height()const {return height;}
+
 		real32 get_per_frame_render_time() const;
 
 		private:

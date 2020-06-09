@@ -1,12 +1,16 @@
 #include "opengl_shader.hh"
 
+#include "parrot.hh"
 #include "resource_handler.hh"
 #include "parrot.hh"
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 namespace parrot{
@@ -98,6 +102,62 @@ namespace parrot{
 	void Shader_Program::unuse_program()
 	{
 		glUseProgram(0);
+	}
+
+	int Shader_Program::set_uniform(std::string name, glm::mat4 matval)
+	{
+		for(auto element : uniforms)
+		{
+			if(name.compare(element.name) == 0)
+			{
+				glUniformMatrix4fv(element.location, 1, GL_FALSE, glm::value_ptr(matval));
+				return 0;
+			}
+		} 
+		
+
+		Uniform_Info element = add_uniform(name);
+		
+		if(element.location == -1) return -1;
+		glUniformMatrix4fv(element.location, 1, GL_FALSE, glm::value_ptr(matval));
+
+		return 0;
+
+	}
+
+	int Shader_Program::set_uniform(std::string name, real32 realval)
+	{
+		for(auto element : uniforms)
+		{
+			if(name.compare(element.name) == 0)
+			{
+				glUniform1f(element.location, realval);
+				return 0;
+			}
+		} 
+		
+
+		Uniform_Info element = add_uniform(name);
+		
+		if(element.location == -1) return -1;
+		glUniform1f(element.location, realval);
+
+		return 0;
+	}
+
+	Uniform_Info Shader_Program::add_uniform(std::string name)
+	{
+		GLint location = glGetUniformLocation(program, name.c_str());
+		if(location == -1)
+		{
+			std::cout << "Unable to find uniform: " << name  << std::endl;
+			return {"", -1};
+		}
+
+		Uniform_Info info = {name, location};
+		uniforms.push_back(info);
+
+		return info;
 	}
 }
 
