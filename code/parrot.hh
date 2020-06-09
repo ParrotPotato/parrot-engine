@@ -1,4 +1,4 @@
-#ifndef PARROT_TYPES 
+#ifndef PARROT_CORE 
 
 #include <stdint.h>
 
@@ -17,7 +17,17 @@ namespace parrot{
 	typedef float real32;
 	typedef double real64;
 
+	class Core
+	{
+		public:
+			static void init();
+			static bool is_running();
+			static bool terminate_core();
+		private:
+			static bool is_engine_running;	
+	};
+
 }
 
-#define PARROT_TYPES
+#define PARROT_CORE
 #endif

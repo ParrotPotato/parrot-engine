@@ -1,14 +1,14 @@
-#include "parrot.cpp"
-#include "window.cpp"
-#include "input.cpp"
+#include "parrot.hh"
+#include "window.hh"
+#include "input.hh"
 
-#include "texture.cpp"
+#include "texture.hh"
 
-#include "opengl_shader.cpp"
+#include "opengl_shader.hh"
 
-#include "vertex_array.cpp"
-#include "vertex_buffer.cpp"
-#include "index_buffer.cpp"
+#include "vertex_array.hh"
+#include "vertex_buffer.hh"
+#include "index_buffer.hh"
 
 void keydown(int key)
 {

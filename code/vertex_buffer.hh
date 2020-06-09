@@ -1,5 +1,7 @@
 #ifndef PARROT_VERTEX_BUFFER
 
+#include "parrot.hh"
+
 #include <GL/glew.h>
 
 namespace parrot
@@ -7,23 +9,10 @@ namespace parrot
 	class Vertex_Buffer
 	{
 		public:
-		void bind() const 
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, id);
-		}
+		void bind() const ;
+		void unbind() const;
 
-		void unbind() const
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
-
-		Vertex_Buffer(void * dataptr, uint64 size, int type = GL_STATIC_DRAW)
-		{
-			glGenBuffers(1, &id);
-			glBindBuffer(GL_ARRAY_BUFFER, id);
-			glBufferData(GL_ARRAY_BUFFER, size, dataptr, type);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
+		Vertex_Buffer(void * dataptr, uint64 size, int type = GL_STATIC_DRAW);
 
 		private:
 
@@ -37,3 +26,4 @@ namespace parrot
 
 #define PARROT_VERTEX_BUFFER
 #endif 
+

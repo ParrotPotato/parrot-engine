@@ -1,18 +1,14 @@
-#ifndef PARROT_WINDOW
+#include "window.hh"
+#include "parrot.hh"
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
 #include <assert.h>
 
-#include "types.cpp"
-
 namespace parrot{
 
-	struct Window
-	{
-		public:
-		void create_widnow(const char * buffer, int width, int height)
+		void Window::create_widnow(const char * buffer, int width, int height)
 		{
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -35,23 +31,23 @@ namespace parrot{
 			this->width = width;
 		}
 
-		void set_clear_color(uint8 r, uint8 g, uint8 b, uint8 a)
+		void Window::set_clear_color(uint8 r, uint8 g, uint8 b, uint8 a)
 		{
 			glClearColor(r/255.0f, g/255.0f, b/255.0f, a/255.0f);
 		}
 
-		void set_clear_depth(float d)
+		void Window::set_clear_depth(float d)
 		{
 			glClearDepth(d);
 		}
 
-		void clear()
+		void Window::clear()
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
 
-		void update()
+		void Window::update()
 		{
 			static uint32 lastticks = 0;
 			if(lastticks != 0) 
@@ -63,22 +59,9 @@ namespace parrot{
 			lastticks = SDL_GetTicks();
 		}
 
-		real32 get_per_frame_render_time() const 
+		real32 Window::get_per_frame_render_time() const 
 		{
 			return rendertime;
 		}
 
-		private:
-		SDL_Window * sdlwindow = 0;
-		SDL_GLContext sdlcontext = 0;
-
-		uint32 height = 0;
-		uint32 width = 0;
-
-		real32 rendertime = 0;
-	
-	};
 }
-
-#define PARROT_WINDOW
-#endif
