@@ -22,7 +22,7 @@ namespace parrot{
 		public:
 			static void init();
 			static bool is_running();
-			static bool terminate_core();
+			static void terminate_core();
 		private:
 			static bool is_engine_running;	
 	};

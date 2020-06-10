@@ -18,7 +18,7 @@ namespace parrot{
 		// This is responsible for transforming objects 
 		// from workd space to camera / view space 
 		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, -position);
+		view = glm::lookAt(position, position + facing, up);
 
 		// This is responsible for transforming objects
 		// to a orthographic / prespective projects

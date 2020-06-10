@@ -58,18 +58,16 @@ int main()
 		0, 2, 3
 	};
 
-	// ADDING A NEW THINGS HERE FOR TESTING OUT THE MAIN BUFFER
-	// AND ITS FUNCTIONALITY 
-	
-	parrot::Camera camera = {};
-	camera.get_matrix(); // Thsi is the things which returns us the buffer handler
-
 	parrot::Texture texture("res/wall.jpg");
 	parrot::Vertex_Buffer vertexbuffer(vertices, sizeof(Vertex) *  4);
 	parrot::Index_Buffer indexbuffer(indices, sizeof(parrot::uint32) * 6, 6);
 
 	parrot::Camera camera = {};
-	camera.position = glm::vec3(0.0, 0.0, 2.0f);
+
+	camera.position = glm::vec3(0.0f, 0.0f, 2.0f);
+	camera.facing = glm::vec3(0.0f, 0.0f, -1.0f);
+	camera.up = glm::vec3(0.0f, 1.0f, 0.0f);
+
 	camera.width = main_window.get_width();
 	camera.height = main_window.get_height();
 	camera.near = 0.1f;

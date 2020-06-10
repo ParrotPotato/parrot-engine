@@ -21,7 +21,7 @@ namespace parrot{
 		return is_engine_running;
 	}
 
-	bool Core::terminate_core()
+	void Core::terminate_core()
 	{
 		is_engine_running = false;
 	}
