@@ -27,6 +27,11 @@ namespace parrot{
 			// Initializing glew for graphics accleration 
 			assert(glewInit() == GLEW_OK);	
 
+			// Enable depth buffer for rendering 2d Objects
+			glEnable(GL_DEPTH_TEST);
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
+			glClearDepth(1.0f);
+
 			this->height = height;
 			this->width = width;
 		}

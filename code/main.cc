@@ -6,23 +6,24 @@
 #include "texture.hh"
 
 #include "opengl_shader.hh"
+#include "mesh_loader.hh"
 
 #include "vertex_array.hh"
 #include "vertex_buffer.hh"
 #include "index_buffer.hh"
 
-#include <iostream>
-
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/string_cast.hpp>
-
-// Here is a new comment for handling the output and input
+// NOTE(nitesh): We are not able to access out local variables when 
+// we are updating from this call back. This may cause some issues 
+// down the road 
 
 void keydown(int key)
 {
 	if(key == SDLK_ESCAPE)
 		parrot::Core::terminate_core();
 }
+
+// INFO(nitesh): Handling input and VERTEX buffer 
+// for specified object and type
 
 struct Vertex
 {
@@ -64,7 +65,7 @@ int main()
 
 	parrot::Camera camera = {};
 
-	camera.position = glm::vec3(0.0f, 0.0f, 2.0f);
+	camera.position = glm::vec3(0.0f, 0.0f, 1.0f);
 	camera.facing = glm::vec3(0.0f, 0.0f, -1.0f);
 	camera.up = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -86,8 +87,15 @@ int main()
 	vertexarray.add_vertex_buffer(vertexbuffer, bufferlayout);
 	vertexarray.add_index_buffer(indexbuffer); 
 
+	// Trying to load cube mesh 
+	parrot::Mesh cubemesh = parrot::Mesh_Loader::load_obj("mesh/cube.obj");
+
+	parrot::real32 t = 0;
+
 	while(parrot::Core::is_running())
-	{
+	{	
+		camera.position = glm::vec3(0.0f, 0.0f, 3.0f) + glm::vec3(0.0f, 0.0f, std::sin(t) * 2.0f);
+
 		main_window.clear();
 
 		texture.bind(GL_TEXTURE0);
@@ -102,6 +110,8 @@ int main()
 		
 		inputhandler.update();
 		main_window.update();
+
+		t += 0.02f;
 	}
 
 	return 0;
