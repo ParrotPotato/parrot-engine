@@ -44,7 +44,7 @@ namespace parrot
 
 	Mesh Mesh_Loader::load_obj(std::string filename)
 	{
-		std::cout << "[DEBUG] Parsing UV index of obj file not implemented yet" << std::endl;
+//		std::cout << "[DEBUG] Parsing UV index of obj file not implemented yet" << std::endl;
 
 		std::fstream meshfile(filename, std::ios::in);
 		
@@ -66,7 +66,7 @@ namespace parrot
 
 		while(std::getline(meshfile, line, '\n'))
 		{
-			std::cout << "line : " << line << std::endl;
+//			std::cout << "line : " << line << std::endl;
 
 			if(line[0] == 'v')
 			{
@@ -111,7 +111,7 @@ namespace parrot
 				while(ss >> line)
 				{
 
-					std::cout << "Processing " << line << "[may cause errors]" << std::endl;
+//					std::cout << "Processing " << line << "[may cause errors]" << std::endl;
 					
 					std::stringstream iss(line);
 					
@@ -122,16 +122,16 @@ namespace parrot
 						std::getline(iss, line, '/');
 						if(line.size() == 0) continue;
 
-						std::cout << "internal line " << line << std::endl;
+//						std::cout << "internal line " << line << std::endl;
 						vals[i] = std::stoi(line); 
-						std::cout << "value " << i << " : " << vals[i] << std::endl;
+//						std::cout << "value " << i << " : " << vals[i] << std::endl;
 					}
 
 					// Where magic happens 
 					
 					vertex_normal_index vni = {vals[0], vals[2]};
 
-					std::cout << "Searching for vni " << vni.v << " " << vni.n << std::endl;
+//					std::cout << "Searching for vni " << vni.v << " " << vni.n << std::endl;
 
 					auto it = indicesbuffer.find(vni);
 
@@ -166,7 +166,7 @@ namespace parrot
 
 						res.indices.push_back(thatindex);
 
-						std::cout << "Searching fond that index " << thatindex << std::endl;
+//						std::cout << "Searching fond that index " << thatindex << std::endl;
 					}
 				}
 			}
