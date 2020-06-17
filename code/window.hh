@@ -33,7 +33,7 @@ namespace parrot{
 		uint32 width = 0;
 
 		real32 rendertime = 0;
-	
+
 	};
 }
 

@@ -12,6 +12,8 @@
 #include "vertex_buffer.hh"
 #include "index_buffer.hh"
 
+#include <glm/gtx/rotate_vector.hpp>
+
 // NOTE(nitesh): We are not able to access out local variables when 
 // we are updating from this call back. This may cause some issues 
 // down the road 
@@ -92,10 +94,53 @@ int main()
 
 	parrot::real32 t = 0;
 
+	parrot::real32 speed = 0.1f ;
+	parrot::real32 rotation_speed = 0.8f;
+
+	auto keydown_lambda = [&](int key)
+	{
+
+		if(key == SDLK_ESCAPE)
+		{
+			parrot::Core::terminate_core();
+		}
+		else if(key == SDLK_a)
+		{
+			camera.position = camera.position - speed * glm::normalize(glm::cross(camera.facing, camera.up));
+		}
+		else if(key == SDLK_d)
+		{
+			camera.position = camera.position + speed * glm::normalize(glm::cross(camera.facing, camera.up));
+		}
+		else if(key == SDLK_w)
+		{
+			camera.position = camera.position + speed * camera.facing;
+		}
+		else if(key == SDLK_s)
+		{
+			camera.position = camera.position - speed * camera.facing;
+		}
+
+		else if(key == SDLK_q)
+		{
+			camera.facing = glm::rotate(camera.facing, glm::radians(rotation_speed), glm::vec3(camera.up));
+		}
+		else if(key == SDLK_e)
+		{
+			camera.facing = glm::rotate(camera.facing, -glm::radians(rotation_speed), glm::vec3(camera.up));
+		}
+
+	};
+
+	inputhandler.set_keydown_callback(keydown_lambda);
+	inputhandler.set_keypress_callback(keydown_lambda);
+
 	while(parrot::Core::is_running())
 	{	
-		camera.position = glm::vec3(0.0f, 0.0f, 3.0f) + glm::vec3(0.0f, 0.0f, std::sin(t) * 2.0f);
 
+	//	camera.position = glm::vec3(0.0f, 0.0f, 3.0f) + glm::vec3(0.0f, 0.0f, std::sin(t) * 2.0f);
+	//	camera.facing = glm::rotate(camera.facing, glm::radians(t), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		main_window.clear();
 
 		texture.bind(GL_TEXTURE0);
@@ -111,7 +156,7 @@ int main()
 		inputhandler.update();
 		main_window.update();
 
-		t += 0.02f;
+		t = 0.8f;
 	}
 
 	return 0;

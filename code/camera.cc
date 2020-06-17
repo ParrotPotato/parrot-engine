@@ -22,7 +22,7 @@ namespace parrot{
 
 		// This is responsible for transforming objects
 		// to a orthographic / prespective projects
-		glm::mat4 projection = glm::perspective(glm::radians(90.0f),
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
 				width / height, near, far);
 
 		return projection * (view * model);
