@@ -3,6 +3,8 @@
 #include "input.hh"
 #include "camera.hh"
 
+#include "logger.hh"
+
 #include "texture.hh"
 
 #include "opengl_shader.hh"
@@ -39,7 +41,7 @@ int main()
 	parrot::Core::init();
 
 	parrot::Window main_window;
-	main_window.create_widnow("main_window", 600, 430);
+	main_window.create_widnow("main_window", 800, 600);
 	parrot::InputHandler inputhandler; 
 
 	inputhandler.set_keydown_callback(keydown);
@@ -97,43 +99,31 @@ int main()
 	parrot::real32 speed = 0.1f ;
 	parrot::real32 rotation_speed = 0.8f;
 
+	parrot::real32 sensitivity = 0.1f;
+
 	auto keydown_lambda = [&](int key)
 	{
+		if(key == SDLK_ESCAPE) parrot::Core::terminate_core();
+		else if(key == SDLK_a) camera.position = camera.position - speed * glm::normalize(glm::cross(camera.facing, camera.up));
+		else if(key == SDLK_d) camera.position = camera.position + speed * glm::normalize(glm::cross(camera.facing, camera.up));
+		else if(key == SDLK_w) camera.position = camera.position + speed * camera.facing;
+		else if(key == SDLK_s) camera.position = camera.position - speed * camera.facing;
+	};
 
-		if(key == SDLK_ESCAPE)
-		{
-			parrot::Core::terminate_core();
-		}
-		else if(key == SDLK_a)
-		{
-			camera.position = camera.position - speed * glm::normalize(glm::cross(camera.facing, camera.up));
-		}
-		else if(key == SDLK_d)
-		{
-			camera.position = camera.position + speed * glm::normalize(glm::cross(camera.facing, camera.up));
-		}
-		else if(key == SDLK_w)
-		{
-			camera.position = camera.position + speed * camera.facing;
-		}
-		else if(key == SDLK_s)
-		{
-			camera.position = camera.position - speed * camera.facing;
-		}
+	auto mouseevent_lambda = [&](const SDL_Event & event)
+	{
+		if(event.type == SDL_MOUSEMOTION) camera.facing = glm::rotate(camera.facing, 
+																											glm::radians(rotation_speed) * event.motion.xrel * sensitivity * (-1.0f), 
+																											glm::vec3(camera.up));
 
-		else if(key == SDLK_q)
-		{
-			camera.facing = glm::rotate(camera.facing, glm::radians(rotation_speed), glm::vec3(camera.up));
-		}
-		else if(key == SDLK_e)
-		{
-			camera.facing = glm::rotate(camera.facing, -glm::radians(rotation_speed), glm::vec3(camera.up));
-		}
-
+		if(event.type == SDL_MOUSEMOTION) camera.facing = glm::rotate(camera.facing, 
+																											glm::radians(rotation_speed) * event.motion.yrel * sensitivity * 1.0f, 
+																											glm::vec3(-1.0f, 0.0f, 0.0f));
 	};
 
 	inputhandler.set_keydown_callback(keydown_lambda);
 	inputhandler.set_keypress_callback(keydown_lambda);
+	inputhandler.set_mousemotion_callback(mouseevent_lambda);
 
 	while(parrot::Core::is_running())
 	{	

@@ -11,9 +11,14 @@ namespace parrot{
 	
 	InputHandler::InputHandler()
 	{
+
 		keydown = &placeholder_func;
 		keyup = &placeholder_func;
 		keypress = &placeholder_func;
+
+		mousebutton = placeholder_mouseevent;
+		mousemotion = placeholder_mouseevent;
+
 	}
 
 	void InputHandler::update()
@@ -51,6 +56,16 @@ namespace parrot{
 					keys[event.key.keysym.sym] = false;
 					break;
 
+				case SDL_MOUSEMOTION:
+					mousemotion(event);
+					break;
+				
+				case SDL_MOUSEBUTTONDOWN:
+				case SDL_MOUSEBUTTONUP:
+					mousebutton(event);
+					break;
+
+
 				default:
 					break;
 			}
@@ -62,10 +77,12 @@ namespace parrot{
 	{
 		keydown =  func;
 	}
+
 	void InputHandler::set_keyup_callback(std::function<void(int)> func)
 	{
 		keyup =  func;
 	}
+
 	void InputHandler::set_keypress_callback(std::function<void(int)> func)
 	{
 		keypress = func;
@@ -74,6 +91,21 @@ namespace parrot{
 	void InputHandler::placeholder_func(int x)
 	{
 		return; 
+	}
+
+	void InputHandler::placeholder_mouseevent(const SDL_Event & sdlevent)
+	{
+		return;
+	}
+
+	void InputHandler::set_mousemotion_callback(std::function<void(const SDL_Event &sdlevent)> func)
+	{
+		mousemotion = func;
+	}
+
+	void InputHandler::set_mousebutton_callback(std::function<void(const SDL_Event &sdlevent)> func)
+	{
+		mousebutton = func;
 	}
 
 }
